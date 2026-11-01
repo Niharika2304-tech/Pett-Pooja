@@ -196,3 +196,47 @@ body.dark-mode {
         max-width: 100%;
     }
 }
+/* API Settings section */
+.settings {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.settings h2 {
+    color: #d96329;
+    margin-bottom: 15px;
+}
+
+.settings input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.settings input:focus {
+    outline: 2px solid #e87535;
+}
+
+.settings p {
+    margin-top: 10px;
+}
+
+/* Dark mode settings */
+.dark-mode .settings {
+    background-color: #303030;
+}
+
+.dark-mode .settings h2 {
+    color: #ffab75;
+}
+
+.dark-mode .settings input {
+    background-color: #424242;
+    color: white;
+    border-color: #666666;
+}

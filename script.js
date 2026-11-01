@@ -39,3 +39,27 @@ generateBtn.addEventListener("click", function () {
     message.textContent = "Ingredients added! AI recipe generation is our next step.";
     message.style.color = "green";
 });
+
+// API Key Settings
+const apiKeyInput = document.getElementById("apiKey");
+const saveKeyBtn = document.getElementById("saveKeyBtn");
+const keyMessage = document.getElementById("keyMessage");
+
+// Load the saved API key when the website opens
+apiKeyInput.value = localStorage.getItem("geminiApiKey") || "";
+
+// Save the API key
+saveKeyBtn.addEventListener("click", function () {
+    const apiKey = apiKeyInput.value.trim();
+
+    if (apiKey === "") {
+        keyMessage.textContent = "Please enter your API key.";
+        keyMessage.style.color = "red";
+        return;
+    }
+
+    localStorage.setItem("geminiApiKey", apiKey);
+
+    keyMessage.textContent = "API key saved successfully!";
+    keyMessage.style.color = "green";
+});

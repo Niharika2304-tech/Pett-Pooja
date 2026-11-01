@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pett Pooja | AI Recipe Generator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>🍲 Pett Pooja</h1>
+        <p>Your ingredients, your recipe!</p>
+
+        <button id="themeToggle">🌙 Dark Mode</button>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>What can we cook today?</h2>
+            <p>Enter the ingredients you have, and let AI find a recipe for you.</p>
+        </section>
+
+        <section class="recipe-form">
+            <h2>Find Your Recipe</h2>
+
+            <label for="ingredients">Enter your ingredients</label>
+            <textarea
+                id="ingredients"
+                placeholder="Example: potatoes, onions, tomatoes..."
+                rows="4"
+                required
+            ></textarea>
+
+            <label for="diet">Dietary preference</label>
+            <select id="diet">
+                <option value="Any">Any</option>
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Non-vegetarian">Non-vegetarian</option>
+            </select>
+
+            <label for="time">Maximum cooking time</label>
+            <select id="time">
+                <option value="15 minutes">15 minutes</option>
+                <option value="30 minutes">30 minutes</option>
+                <option value="60 minutes">60 minutes</option>
+            </select>
+
+            <button id="generateBtn">✨ Generate Recipe</button>
+            <p id="message" role="status"></p>
+        </section>
+
+        <section id="recipeResult" class="recipe-result">
+            <h2>Your Recipe</h2>
+            <div id="recipeContent">
+                <p>Your generated recipe will appear here.</p>
+            </div>
+        </section>
+
+        <section class="history">
+            <h2>Recipe History</h2>
+            <button id="clearHistoryBtn">Clear History</button>
+            <ul id="historyList"></ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made with ❤️ by Pett Pooja</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

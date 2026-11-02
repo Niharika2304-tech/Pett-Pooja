@@ -2,7 +2,7 @@ const recipeContent = document.getElementById("recipeContent");
 const themeToggle = document.getElementById("themeToggle");
 const ingredientsInput = document.getElementById("ingredients");
 const generateBtn = document.getElementById("generateBtn");
-const message = document.getElementById("message");
+const copyBtn = document.getElementById("copyBtn");
 
 // Recipe History
 const historyList = document.getElementById("historyList");
@@ -208,4 +208,23 @@ saveKeyBtn.addEventListener("click", function () {
 
     keyMessage.textContent = "API key saved successfully!";
     keyMessage.style.color = "green";
+});
+// Copy the generated recipe
+copyBtn.addEventListener("click", async function () {
+    const recipe = recipeContent.innerText.trim();
+
+    if (!recipe || recipe === "Your generated recipe will appear here.") {
+        message.textContent = "Generate a recipe first.";
+        message.style.color = "red";
+        return;
+    }
+
+    try {
+        await navigator.clipboard.writeText(recipe);
+        message.textContent = "Recipe copied successfully!";
+        message.style.color = "green";
+    } catch (error) {
+        message.textContent = "Unable to copy. Please try again.";
+        message.style.color = "red";
+    }
 });

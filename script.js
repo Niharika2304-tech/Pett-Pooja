@@ -96,6 +96,8 @@ generateBtn.addEventListener("click", async function () {
     }
 
     message.textContent = "Generating your recipe...";
+    generateBtn.disabled = true;
+    generateBtn.textContent = "⏳ Generating...";
     message.style.color = "green";
 
     const prompt = `
@@ -181,10 +183,13 @@ displayHistory();
 message.textContent = "Recipe generated successfully!";
 message.style.color = "green";
 
-    } catch (error) {
-        message.textContent = error.message || "Something went wrong. Please try again.";
-        message.style.color = "red";
-    }
+    } catch(error) {
+    message.textContent = error.message || "Something went wrong. Please try again.";
+    message.style.color = "red";
+} finally {
+    generateBtn.disabled = false;
+    generateBtn.textContent = "✨ Generate Recipe";
+}
 });
 
 // API Key Settings

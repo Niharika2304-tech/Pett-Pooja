@@ -3,6 +3,7 @@ const themeToggle = document.getElementById("themeToggle");
 const ingredientsInput = document.getElementById("ingredients");
 const generateBtn = document.getElementById("generateBtn");
 const copyBtn = document.getElementById("copyBtn");
+const downloadBtn = document.getElementById("downloadBtn");
 
 // Recipe History
 const historyList = document.getElementById("historyList");
@@ -227,4 +228,26 @@ copyBtn.addEventListener("click", async function () {
         message.textContent = "Unable to copy. Please try again.";
         message.style.color = "red";
     }
+});
+// Download the generated recipe
+downloadBtn.addEventListener("click", function () {
+    const recipe = recipeContent.innerText.trim();
+
+    if (!recipe || recipe === "Your generated recipe will appear here.") {
+        message.textContent = "Generate a recipe first.";
+        message.style.color = "red";
+        return;
+    }
+
+    const file = new Blob([recipe], { type: "text/plain" });
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(file);
+    link.download = "Pett-Pooja-Recipe.txt";
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+
+    message.textContent = "Recipe downloaded successfully!";
+    message.style.color = "green";
 });

@@ -4,6 +4,9 @@ const ingredientsInput = document.getElementById("ingredients");
 const generateBtn = document.getElementById("generateBtn");
 const copyBtn = document.getElementById("copyBtn");
 const downloadBtn = document.getElementById("downloadBtn");
+const apiKeyInput = document.getElementById("apiKey");
+const saveKeyBtn = document.getElementById("saveKeyBtn");
+const keyMessage = document.getElementById("keyMessage");
 
 // Recipe History
 const historyList = document.getElementById("historyList");
@@ -76,7 +79,8 @@ themeToggle.addEventListener("click", function () {
 generateBtn.addEventListener("click", async function () {
 
     const ingredients = ingredientsInput.value.trim();
-    const apiKey = localStorage.getItem("geminiApiKey");
+    const apiKey = apiKeyInput.value.trim() ||
+               localStorage.getItem("geminiApiKey") || "";
     const diet = document.getElementById("diet").value;
     const time = document.getElementById("time").value;
     
@@ -192,10 +196,7 @@ message.style.color = "green";
 }
 });
 
-// API Key Settings
-const apiKeyInput = document.getElementById("apiKey");
-const saveKeyBtn = document.getElementById("saveKeyBtn");
-const keyMessage = document.getElementById("keyMessage");
+
 
 // Load the saved API key when the website opens
 apiKeyInput.value = localStorage.getItem("geminiApiKey") || "";
@@ -205,15 +206,25 @@ saveKeyBtn.addEventListener("click", function () {
     const apiKey = apiKeyInput.value.trim();
 
     if (apiKey === "") {
+        localStorage.removeItem("geminiApiKey");
         keyMessage.textContent = "Please enter your API key.";
         keyMessage.style.color = "red";
         return;
     }
 
-    localStorage.setItem("geminiApiKey", apiKey);
+    try {
+        localStorage.setItem("geminiApiKey", apiKey);
 
-    keyMessage.textContent = "API key saved successfully!";
-    keyMessage.style.color = "green";
+        if (localStorage.getItem("geminiApiKey") === apiKey) {
+            keyMessage.textContent = "API key saved successfully!";
+            keyMessage.style.color = "green";
+        } else {
+            throw new Error("Key verification failed");
+        }
+    } catch (error) {
+        keyMessage.textContent = "Unable to save API key.";
+        keyMessage.style.color = "red";
+    }
 });
 // Copy the generated recipe
 copyBtn.addEventListener("click", async function () {
